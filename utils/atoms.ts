@@ -4,12 +4,18 @@ export const loginState = atom({
   key: "isLogin",
   default: false,
 });
+
 export const emailState = atom({
   key: "email",
   default: "",
 });
-  
+
 export const memberIdState = atom({
   key: "memberId",
   default: 0,
+});
+
+export const darkState = atom({
+  key: "isDark",
+  default: false,
 });

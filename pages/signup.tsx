@@ -30,9 +30,9 @@ export default function Signup() {
       // console.log(ssnResult);
       console.log(data);
       const response = await axios.post(
-           `http://localhost:8080/v1/members/create`,
-           data
-         );
+        `http://localhost:8080/v1/members/create`,
+        data
+      );
 
       //회원가입 성공 시 isSignUpSuccess 를 true로 설정
 
@@ -63,13 +63,13 @@ export default function Signup() {
   };
   return (
     <Layout title="EchoMe" hasTabBar>
-      <div className="">
+      <div className="transition-colors">
         <div className="">
-          <div className="flex justify-center items-center h-screen mx-auto mt-20 ">
-            <div className="w-full max-w-md h-screen mx-auto mt-20">
-              <div className="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4">
+          <div className="flex justify-center items-center h-screen mx-auto dark:bg-gray-900 transition-colors">
+            <div className="w-full max-w-md mx-auto">
+              <div className="bg-white dark:bg-black shadow-lg rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
-                <h2 className="text-2xl font-bold mb-4 text-center">회원가입</h2>
+                  <h2 className="text-2xl font-bold">회원 가입</h2>
                 </div>
                 <div className="">
                   <form onSubmit={handleSubmit(onValid)}>
@@ -84,7 +84,7 @@ export default function Signup() {
                           },
                         })}
                         placeholder="이메일 형식"
-                        className="w-full p-2 border rounded"
+                        className="w-full p-2 border rounded dark:bg-gray-700"
                       />
                     </div>
                     <div className="mb-4">
@@ -93,7 +93,7 @@ export default function Signup() {
                           required: "이름을 입력하세요.",
                         })}
                         placeholder="이 름"
-                        className="w-full p-2 border rounded"
+                        className="w-full p-2 border rounded dark:bg-gray-700"
                       />
                     </div>
                     <div className="mb-4">
@@ -118,7 +118,7 @@ export default function Signup() {
                         type="password"
                         autoComplete="current-password"
                         placeholder="숫자와 특수문자를 섞은 8-16 자리 숫자"
-                        className="w-full p-2 border rounded"
+                        className="w-full p-2 border rounded dark:bg-gray-700"
                       />
                     </div>
                     <div className="mb-4">
@@ -139,11 +139,11 @@ export default function Signup() {
                         })}
                         placeholder="( - ) 없이 입력"
                         maxLength={13}
-                        className="w-full p-2 border rounded"
+                        className="w-full p-2 border rounded dark:bg-gray-700"
                       />
                     </div>
                     <div className="">
-                      <button className="bg-black text-white p-2 rounded w-full">
+                      <button className="bg-black text-white p-2 rounded dark:bg-white dark:text-black">
                         가입 하기
                       </button>
                     </div>

@@ -18,21 +18,24 @@ export default function Home() {
 
   return (
     <Layout title="EchoMe" hasTabBar>
-      <div className="h-screen container mx-auto">
-        <div className="page-1 h-full overflow-y-scroll bg-[url('../public/background03.png')]">
-          <h1>환 영 합 니 다1</h1>
-          <button onClick={joinUs} className="bg-black text-white p-2 rounded">
-            JOIN US
-          </button><br/>
-          <button onClick={quesans} className="bg-black text-white p-2 rounded">
-            Q&A
-          </button>
-        </div>
-        <div className="page-1 h-full overflow-y-scroll bg-[url('../public/background03.png')]">
-          <h1>환 영 합 니 다2</h1>
-        </div>
-        <div className="page-1 h-full overflow-y-scroll bg-[url('../public/background03.png')]">
-          <h1>환 영 합 니 다3</h1>
+      <div className="flex justify-center items-center h-screen mx-auto dark:bg-gray-900 transition-colors">
+          <div className="max-w-md mx-auto">
+          {/* <div className="page-1 h-full overflow-y-scroll bg-[url('../public/background03.png')]"> */}
+          <div className="page-1 h-full overflow-y-scroll justify-center mt-4">
+            <h1>환 영 합 니 다1</h1>
+            <button onClick={joinUs} className="bg-black text-white p-2 rounded justify-center mt-4">
+              JOIN US
+            </button><br/>
+            <button onClick={quesans} className="bg-black text-white p-2 rounded justify-center mt-4">
+              Q&A
+            </button>
+          </div>
+          <div className="page-1 h-full overflow-y-scroll justify-center mt-4">
+            <h1>환 영 합 니 다2</h1>
+          </div>
+          <div className="page-1 h-full overflow-y-scroll justify-center mt-4">
+            <h1>환 영 합 니 다3</h1>
+          </div>
         </div>
       </div>
     </Layout>

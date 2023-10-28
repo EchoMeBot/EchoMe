@@ -1,5 +1,3 @@
-// pages/chatbot.tsx
-
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { SubmitHandler } from "react-hook-form";
@@ -17,7 +15,9 @@ let initialMessagesState: MessageType[] = [];
 // 클라이언트 측에서만 동작하는 코드
 if (typeof window !== "undefined") {
   // localStorage에서 UserData를 가져와서 userName 변수를 초기화합니다.
-  const userData = JSON.parse(localStorage.getItem("UserData") || "null") as { name: string } | null;
+  const userData = JSON.parse(localStorage.getItem("UserData") || "null") as {
+    name: string;
+  } | null;
   const userName = userData ? userData.name : "사용자 이름이 없습니다";
 
   // userName 변수를 사용합니다.
@@ -26,7 +26,9 @@ if (typeof window !== "undefined") {
       role: MESSAGE_ROLES.ASSISTANT,
       ariaLabel: `KezBot said:`,
       content:
-        "안녕하세요! 저는 " + userName + "의 에콤이입니다! 저에 대해 궁금한 것을 물어봐주세요:)",
+        "안녕하세요! 저는 " +
+        userName +
+        "의 에콤이입니다! 저에 대해 궁금한 것을 물어봐주세요:)",
     },
   ];
 
@@ -47,7 +49,6 @@ export default function Chatbot() {
 
     scrollToBottom();
   }, [messages]);
-
 
   const handleFormSubmission: SubmitHandler<QuestionFormSchema> = async (
     values
@@ -128,8 +129,8 @@ export default function Chatbot() {
   return (
     <Layout title="EchoMe">
       {isError ? <ErrorMessage /> : null}
-      <div className="">
-        <div className="pb-32">
+      <div className="dark:bg-black h-auto">
+        <div className="pt-[8vh] pb-[58vh]">
           <Conversation>
             {messages.map((message, i) => (
               <Message

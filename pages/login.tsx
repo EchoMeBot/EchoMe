@@ -29,49 +29,48 @@ export default function Login() {
 
   const onValid = async (data: IFormData) => {
     try {
-    // 서버로 요청을 보내는 부분
-    const response = await axios.post(
-    `http://localhost:8080/v1/members/login`,
-    data
-    );
+      // 서버로 요청을 보내는 부분
+      const response = await axios.post(
+        `http://localhost:8080/v1/members/login`,
+        data
+      );
 
-    if (response.status === 200) {
-      console.log(response);
-      const accessToken = response.headers["accesstoken"];
-      setAccessToken(accessToken);
-      console.log("로그인 성공");
-      setIsLogin(true);
-      console.log("AccessToken:", accessToken);
-      localStorage.setItem("accessToken", accessToken);
-      //console.log(response.data);
-      setMemberId(response.data.id);
-      localStorage.setItem("UserData", JSON.stringify(response.data));
+      if (response.status === 200) {
+        console.log(response);
+        const accessToken = response.headers["accesstoken"];
+        setAccessToken(accessToken);
+        console.log("로그인 성공");
+        setIsLogin(true);
+        console.log("AccessToken:", accessToken);
+        localStorage.setItem("accessToken", accessToken);
+        //console.log(response.data);
+        setMemberId(response.data.id);
+        localStorage.setItem("UserData", JSON.stringify(response.data));
 
-      //회원가입 성공 시 isSignUpSuccess 를 true로 설정
+        //회원가입 성공 시 isSignUpSuccess 를 true로 설정
 
-      /* ===== 로그인 성공 후 홈 페이지로 이동 ===== */
-      nav.push("/");
-    } else {
-      console.error("로그인 실패:", response.statusText);
+        /* ===== 로그인 성공 후 홈 페이지로 이동 ===== */
+        nav.push("/");
+      } else {
+        console.error("로그인 실패:", response.statusText);
       }
-      } catch (error) {
+    } catch (error) {
       console.error(error);
-      } finally {
+    } finally {
       setIsLoading(false);
-      }
-      
-      //console.log(data);
-      console.log(JSON.stringify(errors));
-  };
+    }
 
+    //console.log(data);
+    console.log(JSON.stringify(errors));
+  };
 
   return (
     <Layout title="EchoMe" hasTabBar>
-      <div className="flex justify-center items-center h-screen mx-auto mt-20 ">
-        <div className="w-full max-w-md h-screen mx-auto mt-20">
-          <div className="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4">
+      <div className="flex justify-center items-center h-screen mx-auto dark:bg-gray-900 transition-colors">
+        <div className="w-full max-w-md mx-auto">
+          <div className="bg-white dark:bg-black shadow-lg rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
-            <h2 className="text-2xl font-bold mb-4 text-center">로그인</h2>
+              <h2 className="text-2xl font-bold">로그인</h2>
             </div>
             <form onSubmit={handleSubmit(onValid)}>
               <div className="mb-4">
@@ -83,8 +82,8 @@ export default function Login() {
                       message: "이메일 형식만 가능합니다.",
                     },
                   })}
-                  placeholder="Email"
-                  className="w-full p-2 border rounded"
+                  placeholder="이 메 일"
+                  className="w-full p-2 border rounded dark:bg-gray-700"
                 />
               </div>
               <div className="mb-4">
@@ -107,13 +106,13 @@ export default function Login() {
                   })}
                   type="password"
                   autoComplete="current-password"
-                  placeholder="Password"
-                  className="w-full p-2 border rounded"
+                  placeholder="비밀번호"
+                  className="w-full p-2 border rounded dark:bg-gray-700"
                 />
               </div>
               <div className="mb-4">
-              <button className="bg-black text-white p-2 rounded w-full">
-                  로그인
+                <button className="bg-black dark:bg-white dark:text-black text-white p-2 rounded">
+                  로그인 하기
                 </button>
               </div>
             </form>

@@ -12,19 +12,32 @@ import { getCurrentTime } from "@/helpers/getCurrentTime";
 import styles from "@/styles/Chatbot.module.css";
 import Layout from "@/components/Layout";
 
-const iniitalMessagesState = [
-  {
-    role: MESSAGE_ROLES.ASSISTANT,
-    ariaLabel: `KezBot said:`,
-    content:
-      "안녕하세요! 저는 이채영의 에콤이입니다! 저에 대해 궁금한 것을 물어봐주세요:)",
-  },
-];
+let initialMessagesState: MessageType[] = [];
+
+// 클라이언트 측에서만 동작하는 코드
+if (typeof window !== "undefined") {
+  // localStorage에서 UserData를 가져와서 userName 변수를 초기화합니다.
+  const userData = JSON.parse(localStorage.getItem("UserData") || "null") as { name: string } | null;
+  const userName = userData ? userData.name : "사용자 이름이 없습니다";
+
+  // userName 변수를 사용합니다.
+  initialMessagesState = [
+    {
+      role: MESSAGE_ROLES.ASSISTANT,
+      ariaLabel: `KezBot said:`,
+      content:
+        "안녕하세요! 저는 " + userName + "의 에콤이입니다! 저에 대해 궁금한 것을 물어봐주세요:)",
+    },
+  ];
+
+  // 이후 코드에서 userName 변수를 계속 사용합니다.
+}
+
 export default function Chatbot() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
-  const [messages, setMessages] = useState<MessageType[]>(iniitalMessagesState);
+  const [messages, setMessages] = useState<MessageType[]>(initialMessagesState);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,6 +47,7 @@ export default function Chatbot() {
 
     scrollToBottom();
   }, [messages]);
+
 
   const handleFormSubmission: SubmitHandler<QuestionFormSchema> = async (
     values

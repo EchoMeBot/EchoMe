@@ -78,8 +78,9 @@ const handler = async (req: NextRequest): Promise<Response> => {
     }
 
     //console.log("test1" + response.body);
+
     const responseData = await response.json();
-    context = responseData; // Extract the context from the response data
+    context = responseData.context; // Extract the context from the response data
     console.log("Context:", context);
   } catch (error) {
     console.error("Error fetching context:", error);

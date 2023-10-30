@@ -11,7 +11,9 @@ import styles from "@/styles/Chatbot.module.css";
 import Layout from "@/components/Layout";
 
 let initialMessagesState: MessageType[] = [];
-
+export let accessToken = "";
+export let memberId = 0;
+export let memberName = "";
 // 클라이언트 측에서만 동작하는 코드
 if (typeof window !== "undefined") {
   // localStorage에서 UserData를 가져와서 userName 변수를 초기화합니다.
@@ -43,6 +45,11 @@ export default function Chatbot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    accessToken = localStorage.getItem("accessToken") || "";
+    const memberIdData = localStorage.getItem("memberId");
+    memberId = memberIdData ? JSON.parse(memberIdData).id : null;
+    const memberNameData = localStorage.getItem("UserData");
+    memberName = memberNameData ? JSON.parse(memberNameData).name : null;
     const scrollToBottom = () => {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -68,15 +75,21 @@ export default function Chatbot() {
     try {
       setIsLoading(true);
 
+      // JSON 데이터 생성
+      const jsonData = {
+        question: values.question.replace(/\n/g, " "),
+        messages: latestMessages,
+        accessToken: accessToken, // 추가한 변수 abc
+        memberId: memberId, // 추가한 변수 efg
+        memberName: memberName,
+      };
+
       const response = await fetch("/api/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          question: values.question.replace(/\n/g, " "), // OpenAI recommends replacing newlines with spaces for best results,
-          messages: latestMessages,
-        }),
+        body: JSON.stringify(jsonData),
       });
 
       if (!response.ok) {

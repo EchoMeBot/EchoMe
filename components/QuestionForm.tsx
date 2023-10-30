@@ -36,15 +36,15 @@ export const QuestionForm = ({ onSubmit, isLoading }: QuestionFormProps) => {
     <div className="fixed bottom-0 right-0 left-0 bg-white bg-opacity-60 backdrop-blur-md dark:bg-black dark:bg-opacity-60 dark:text-white md:pt-8 md:pb-8">
       <form
         onSubmit={handleOnSubmit}
-        className="relative mx-auto grid max-w-xl px-4"
+        className="relative mx-auto grid max-w-xl px-4 "
       >
         <>
-          <label className="sr-only row-start-1 row-end-2" htmlFor="question">
+          <label className="sr-only row-start-1 row-end-2 " htmlFor="question">
             Enter your question
           </label>
           <input
             aria-required
-            className="row-start-2 row-end-3 w-full appearance-none rounded-3xl border-2 bg-grey-light py-4 pr-12 pl-4 dark:border-white dark:bg-grey-dark"
+            className="dark:bg-black row-start-2 row-end-3 w-full appearance-none rounded-3xl border-2 bg-grey-light py-4 pr-12 pl-4 dark:border-white dark:bg-grey-dark"
             placeholder="Enter your question"
             type="text"
             id="question"

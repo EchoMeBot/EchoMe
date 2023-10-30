@@ -1,5 +1,5 @@
 import { classbinder } from "@/libs/utils";
-import { darkState, loginState } from "@/utils/atoms";
+import { darkState, loginState, memberIdState } from "@/utils/atoms";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -19,6 +19,7 @@ export default function Layout({
   children,
 }: LayoutProps) {
   const [isRecoilLogin, setIsRecoilLogin] = useRecoilState(loginState);
+  const [memberId, setMemberId] = useRecoilState(memberIdState);
   const [isLogin, setIsLogin] = useState(isRecoilLogin);
   const [userName, setUserName] = useState("");
   const [isDark, setIsDark] = useRecoilState(darkState);
@@ -34,6 +35,7 @@ export default function Layout({
   };
 
   const onLogout = () => {
+    localStorage.removeItem("accessToken");
     localStorage.removeItem("UserData");
     setIsRecoilLogin(false);
     setUserName("");
@@ -58,6 +60,9 @@ export default function Layout({
     if (localStorage.getItem("UserData")) {
       setUserName(JSON.parse(localStorage.getItem("UserData")!).name);
     }
+    if (localStorage.getItem("UserData")) {
+      setMemberId(JSON.parse(localStorage.getItem("UserData")!).id);
+    }
   }, [isRecoilLogin]);
 
   return (
@@ -67,17 +72,6 @@ export default function Layout({
           "dark:bg-black transition-colors bg-white w-full left-0 text-lg px-10 font-medium py-3 fixed  border-b top-0 flex items-center justify-between z-30"
         }
       >
-        {title ? (
-          <span className="cursor-pointer" onClick={onMoveHome}>
-            {title}
-          </span>
-        ) : null}
-        {isLogin ? (
-          <div className="flex flex-row gap-3">
-            <h2>{userName}</h2>
-            <button onClick={onLogout}>로그아웃</button>
-          </div>
-        ) : null}
         {isDark ? (
           <div className="cursor-pointer" onClick={onDarkModeToggle}>
             <svg
@@ -113,6 +107,19 @@ export default function Layout({
             </svg>
           </div>
         )}
+        {title ? (
+          <span className="cursor-pointer ml-20" onClick={onMoveHome}>
+            {title}
+          </span>
+        ) : null}
+        {isLogin ? (
+          <div className="flex flex-row gap-3">
+            <h2 className="text-sm">{userName}님,</h2>
+            <button className="text-sm" onClick={onLogout}>
+              로그아웃
+            </button>
+          </div>
+        ) : null}
       </div>
       <div className={""}>{children}</div>
       {hasTabBar ? (
@@ -121,11 +128,7 @@ export default function Layout({
           dark:bg-black dark:text-gray-100
         "
         >
-          <div
-            onClick={() => {
-              isLogin ? onLogout() : null;
-            }}
-          >
+          <div className={isLogin ? "hidden" : ""}>
             <Link href="/login" legacyBehavior>
               <a className="flex flex-col items-center space-y-2">
                 <svg
@@ -142,7 +145,29 @@ export default function Layout({
                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                   ></path>
                 </svg>
-                {isLogin ? <span>로그 아웃</span> : <span>로 그 인</span>}
+                <span>로 그 인</span>
+              </a>
+            </Link>
+          </div>
+
+          <div className={isLogin ? "" : "hidden"}>
+            <Link href="/updateuser" legacyBehavior>
+              <a className="flex flex-col items-center space-y-2">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  ></path>
+                </svg>
+                <span>회원정보수정</span>
               </a>
             </Link>
           </div>

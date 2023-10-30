@@ -67,10 +67,10 @@ export default function Login() {
   return (
     <Layout title="EchoMe" hasTabBar>
       <div className="flex justify-center items-center h-screen mx-auto dark:bg-gray-900 transition-colors">
-        <div className="w-full max-w-md mx-auto">
+        <div className="w-full max-w-md mx-auto mt-20">
           <div className="bg-white dark:bg-black shadow-lg rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
-              <h2 className="text-2xl font-bold">로그인</h2>
+              <h2 className="text-2xl font-bold text-center">로그인</h2>
             </div>
             <form onSubmit={handleSubmit(onValid)}>
               <div className="mb-4">
@@ -111,8 +111,8 @@ export default function Login() {
                 />
               </div>
               <div className="mb-4">
-                <button className="bg-black dark:bg-white dark:text-black text-white p-2 rounded">
-                  로그인 하기
+                <button className="bg-black dark:bg-white dark:text-black text-white p-2 rounded w-full">
+                  로그인
                 </button>
               </div>
             </form>

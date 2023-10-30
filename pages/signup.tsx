@@ -69,7 +69,7 @@ export default function Signup() {
             <div className="w-full max-w-md mx-auto">
               <div className="bg-white dark:bg-black shadow-lg rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
-                  <h2 className="text-2xl font-bold">회원 가입</h2>
+                  <h2 className="text-2xl font-bold text-center">회원 가입</h2>
                 </div>
                 <div className="">
                   <form onSubmit={handleSubmit(onValid)}>
@@ -143,7 +143,7 @@ export default function Signup() {
                       />
                     </div>
                     <div className="">
-                      <button className="bg-black text-white p-2 rounded dark:bg-white dark:text-black">
+                      <button className="bg-black dark:bg-white dark:text-black text-white p-2 rounded w-full">
                         가입 하기
                       </button>
                     </div>

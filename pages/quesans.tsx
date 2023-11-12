@@ -135,36 +135,35 @@ export default function Quesans() {
 
   return (
     <Layout title="EchoMe" hasTabBar>
-      <div className="transition-colors">
-        <div className="">
-          <div className="flex justify-center items-center h-screen mx-auto dark:bg-gray-900 transition-colors">
-            <div className="w-full max-w-md mx-auto">
-              <div className="bg-white dark:bg-black shadow-lg rounded px-8 pt-6 pb-8 mb-4">
-                <div className="mb-4">
-                  <h2 className="text-2xl font-bold text-center">Q & A</h2>
-                </div>
-                {qaList.map((qa, index) => (
-                  <div key={index} className="mb-4">
-                    <h2 className="mb-1">
-                      {qa.quesId}. {qa.question}
-                    </h2>
-                    <div className="flex space-x-2">
-                      <input
-                        type="text"
-                        value={qa.answer}
-                        className="dark:bg-slate-700 bg-white shadow-lg rounded border border-gray-300 p-2 flex-1"
-                        readOnly
-                      />
-                      <button
-                        onClick={() => openModal(qa.quesId, qa.answer)}
-                        className="bg-black text-white p-2 rounded dark:bg-white dark:text-black"
-                      >
-                        수정하기
-                      </button>
-                    </div>
-                  </div>
-                ))}
+      <div className="transition-colors overflow-y-auto h-full">
+        <div className="h-full flex flex-col justify-center items-center dark:bg-gray-900 transition-colors">
+          <div className="w-full max-w-md mx-auto mt-32 mb-32">
+            <div className="bg-white dark:bg-black shadow-lg rounded px-8 pt-6 pb-8">
+              <div className="mb-4">
+                <h2 className="text-2xl font-bold text-center">Q & A</h2>
               </div>
+              {qaList.map((qa, index) => (
+                <div key={index} className="mb-4">
+                  <h2 className="mb-1">
+                    {qa.quesId}. {qa.question}
+                  </h2>
+                  <div className="flex space-x-2">
+                    <input
+                      type="text"
+                      value={qa.answer}
+                      onClick={() => openModal(qa.quesId, qa.answer)}
+                      className="dark:bg-slate-700 bg-white shadow-lg rounded border border-gray-300 p-2 flex-1"
+                      readOnly
+                    />
+                    <button
+                      onClick={() => openModal(qa.quesId, qa.answer)}
+                      className="bg-black text-white p-2 rounded dark:bg-white dark:text-black"
+                    >
+                      수정하기
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
